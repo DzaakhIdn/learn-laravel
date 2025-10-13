@@ -2,9 +2,9 @@
     <section>
         <div class="mx-auto max-w-7xl">
             <h2 class="font-manrope text-4xl font-bold text-gray-900 text-center mb-14">Our popular blogs</h2>
-            <div class="flex justify-center mb-14 gap-5">
+            <div class="flex justify-center mb-14 gap-5 flex-wrap">
                 @foreach ($posts as $blog)
-                    <x-card-blog :slug="$blog['slug']" :blog_title="$blog['blog_title']" :body="$blog['body']" :author="$blog['author']"
+                    <x-card-blog :slug="$blog['slug']" :blog_title="$blog['blog_title']" :body="$blog['body']" :author="$blog->author->name"
                         :created_at="$blog['created_at']" />
                 @endforeach
             </div>

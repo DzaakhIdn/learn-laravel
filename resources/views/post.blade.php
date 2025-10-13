@@ -20,7 +20,7 @@
                         class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium text-gray-600">
                         AD</div>
                     <div class="text-sm">
-                        <div class="font-medium text-gray-800">{{ $post['author'] }}</div>
+                        <a href="/author/{{ $post->author->id }}" class="font-medium text-gray-800 hover:underline hover:cursor-pointer">{{ $post->author->name }}</a>
                         <div class="text-gray-500">12 Oktober 2025 • 4 menit baca</div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
 
                 <!-- Footer kecil di dalam article -->
                 <footer class="mt-8 border-t border-gray-100 pt-6 text-sm text-gray-600">
-                    <div>Ditulis oleh <span class="font-medium text-gray-800">{{ $post['author'] }}</span>. Terima kasih
+                    <div>Ditulis oleh <span class="font-medium text-gray-800">{{ $post->author->name }}</span>. Terima kasih
                         sudah
                         membaca.</div>
                 </footer>
