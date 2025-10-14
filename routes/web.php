@@ -10,7 +10,8 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', function () {
-    $posts = Post::all();
+    // $posts = Post::with(['category', 'author'])->get();
+    $posts = Post::latest()->get();
     // dd($posts);
     return view('blog', ['title' => 'Blog Page', 'posts' => $posts]);
 });
@@ -22,6 +23,7 @@ Route::get('/post/{post:slug}', function (Post $post) {
 
 Route::get('/author/{user:username}', function (User $user) {
     // dd($post);
+    // $posts = $user->posts->load(['author', 'category']);
     return view('author', ['title' => 'Posts By ' . $user->name, 'posts' => $user->posts, 'author' => $user]);
 });
 
@@ -31,6 +33,7 @@ Route::get('/categories', function () {
 });
 
 Route::get('/single-category/{category:slug}', function (Category $category) {
+    // $categories = $category->posts->load(['author', 'category']);
     return view('singel-category', ['title' => 'Category Page', 'category' => $category, 'posts' => $category->posts]);
 });
 
