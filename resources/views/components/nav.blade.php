@@ -10,6 +10,7 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <x-nav-link href="/" :current="request()->is('/')">Home</x-nav-link>
                         <x-nav-link href="/blog" :current="request()->is('blog')">Blog</x-nav-link>
+                        <x-nav-link href="/categories" :current="request()->is('categories')">Category</x-nav-link>
                         <x-nav-link href="about" :current="request()->is('about')">About</x-nav-link>
                     </div>
                 </div>
