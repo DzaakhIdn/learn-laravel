@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 Route::get('/blog', function () {
     // $posts = Post::with(['category', 'author'])->get();
-    $posts = Post::latest()->get();
+    $posts = Post::latest()->filter(request(['keyword']))->get();
     // dd($posts);
     return view('blog', ['title' => 'Blog Page', 'posts' => $posts]);
 });
@@ -34,7 +34,8 @@ Route::get('/categories', function () {
 
 Route::get('/single-category/{category:slug}', function (Category $category) {
     // $categories = $category->posts->load(['author', 'category']);
-    return view('singel-category', ['title' => 'Category Page', 'category' => $category, 'posts' => $category->posts]);
+    $posts = $category->posts->filter(request(['keyword']));
+    return view('singel-category', ['title' => 'Category Page', 'category' => $category, 'posts' => $posts]);
 });
 
 Route::get('/about', function () {
