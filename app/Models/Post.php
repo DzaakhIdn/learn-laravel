@@ -27,14 +27,14 @@ class Post extends Model
     }
 
     #[Scope]
-    protected function filter(Builder $query, array $filters): void
+    protected function filter(Builder $query, $filters): void
     {
-        $query->when($filters['keyword'] ?? false, function ($query, $search) {
+        $query->when($filters ?? false, function ($query, $search) {
             return $query->where('blog_title', 'like', '%' . $search . '%');
         });
 
-        $query->when($filters['category'] ?? false, function ($query, $category) {
-            return $query->whereHas('category', fn(Builder $query) => $query->where('slug', $category));
-        });
+        // $query->when($filters['category'] ?? false, function ($query, $category) {
+        //     return $query->whereHas('category', fn(Builder $query) => $query->where('slug', $category));
+        // });
     }
 }

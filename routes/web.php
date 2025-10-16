@@ -10,21 +10,17 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', function () {
-    // $posts = Post::with(['category', 'author'])->get();
-    $posts = Post::latest()->filter(request(['keyword']))->get();
-    // dd($posts);
+    $posts = Post::latest()->filter(request('keyword'))->paginate(6);
     return view('blog', ['title' => 'Blog Page', 'posts' => $posts]);
 });
 
 Route::get('/post/{post:slug}', function (Post $post) {
-    // dd($post);
     return view('post', ['title' => 'Single post', 'post' => $post]);
 });
 
 Route::get('/author/{user:username}', function (User $user) {
-    // dd($post);
-    // $posts = $user->posts->load(['author', 'category']);
-    return view('author', ['title' => 'Posts By ' . $user->name, 'posts' => $user->posts, 'author' => $user]);
+    $posts = $user->posts()->filter(request('keyword'))->get();
+    return view('author', ['title' => 'Posts By ' . $user->name, 'posts' => $posts, 'author' => $user]);
 });
 
 Route::get('/categories', function () {
@@ -33,8 +29,7 @@ Route::get('/categories', function () {
 });
 
 Route::get('/single-category/{category:slug}', function (Category $category) {
-    // $categories = $category->posts->load(['author', 'category']);
-    $posts = $category->posts->filter(request(['keyword']));
+    $posts = $category->posts()->filter(request('keyword'))->get();
     return view('singel-category', ['title' => 'Category Page', 'category' => $category, 'posts' => $posts]);
 });
 
